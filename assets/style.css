@@ -1,0 +1,127 @@
+
+body {
+    background-color: #DFEBE0 !important;
+    font-family: 'Arial, sans-serif';
+
+}
+
+h2 {
+    color: #3d5a77;
+}
+
+p{
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+a {
+    display: inline-block;
+    margin: 18px;
+    text-decoration: none;
+    border: 2px solid #ffffff;
+    border-radius: 6px;
+    padding: 10px 20px;
+    background-color: #000000;
+    color : #ffffff
+
+}
+
+a:hover {
+    text-decoration: underline;
+    background-color: #65ADBE;
+    border-color: #3d5a77;
+    color: #ffffff;
+}
+
+
+/* Page 1 Styles for blocking elements*/
+.page1-grid {
+    display:flex;
+    flex-direction: column;
+    padding: 12px;
+    gap: 12px;
+}
+
+.row-2 {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.block {
+    border: 2px dashed #cdb5e1;
+    border-radius: 8px;
+    background-color: #f5f7fa;
+    color: #334155;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.block-top {
+    min-height: 150px;
+    color:#15535e;
+}
+
+.block-footer {
+    min-height: 80px;;
+}
+
+@media (max-width: 768px) {
+    .row-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Page 2 Styles for API elements*/
+.page2 wrap{
+    max-width: 600px;
+    margin: auto;
+    padding: 10px;
+}
+
+.page-title{
+    font-size: 20px;
+    color: #1f2937;
+    margin-top: 6px;
+}
+
+.page-subtitle{
+    color : #475589;
+    margin-top: 10px;
+}
+
+/* Cat fact id styling --- id's are styles with the #id while classes have the 
+decimal before the class */
+
+#button-cat {
+    display: inline-block;
+    font-size: 18px;
+    padding: 10px 18px;
+    border: 2px solid #1f2937;
+    border-radius: 8px;
+    background-color: #0ea5e9;
+    color: white;
+}
+
+#button-cat:hover {
+    background-color: #1b4355;
+    border-color: #0ea5e9;
+    color: white;
+}
+
+#cat-fact {
+    display: block;
+    margin-top: 14px;
+    padding: 14px 16px;
+    background-color: #ffffff;
+    color: #0f172a;
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.5;
+    border: 2px #1f2937 solid;
+    border-radius: 8px;
+    min-height: 72px;
+}
