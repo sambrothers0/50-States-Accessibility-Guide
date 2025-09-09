@@ -1,3 +1,4 @@
+import dash
 from dash import Dash, html, dcc, Input, Output, callback, page_container
 import pandas as pd
 import plotly.express as px
@@ -16,6 +17,7 @@ fig = px.choropleth(
     locations = "State",
     locationmode= "USA-states",
     color = "Points",
+    title= f"Disability Friendliness by State",
     scope= "usa",
     labels = {"State": "Disability Friendly Rank"},
     color_continuous_scale= "Cividis",
