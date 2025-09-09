@@ -1,5 +1,6 @@
 import dash
 from dash import Dash, html, dcc, Input, Output, callback, page_container
+from pathlib import Path
 import pandas as pd
 import plotly.express as px
 
@@ -7,8 +8,8 @@ import plotly.express as px
 dash.register_page(__name__, path="/page1", name="Page 1")
 
 #Load the dataset
-file_path = "data/DisabilityRankedStates.csv"
-df = pd.read_csv(file_path)
+Data_Path = Path(__file__).resolve().parent.parent / "data" / "DisabilityRankedStates.csv"
+df = pd.read_csv(Data_Path)
 
 
 #Chloropleth map
