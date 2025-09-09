@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+import dash
 from dash import html, dcc, Input, Output, callback, register_page
 import pandas as pd
 import plotly.express as px
@@ -28,10 +27,8 @@ layout = html.Div(
         tooltip= {"placement": "bottom", "always_visible": True},
     ),
     
-<<<<<<< HEAD
     return heading_text, paragraph_text, links_list
->>>>>>> 65f1826713b8454a7c7b7e0a7d2dd0fc5746f5a1
-=======
+
     html.Br(),
     dcc.Graph(id="chloropleth-map")
 
@@ -60,5 +57,3 @@ def update_map(selected_year):
                       font_color="white", #font color
                       margin= dict(l=10, r=10, t=50, b=10)) #margins around map
     return fig
-
->>>>>>> 1b68c989707c5ee99e8b796c48aa8d8cf56d7a68
