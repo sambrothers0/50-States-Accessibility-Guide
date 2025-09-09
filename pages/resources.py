@@ -4,7 +4,7 @@ import pandas as pd
 import plotly.express as px
 from pathlib import Path
 
-register_page(__name__, path="/webscrape2", name="Web Scrape 2")
+register_page(__name__, path="/resources", name="Resources")
 
 # web scrape packages
 import requests
@@ -65,7 +65,8 @@ layout = html.Div(
             "See services in all states: "
         ),
         html.A("https://www.disabilityresources.org/state-services")
-    ]
+    ],
+    className="resources-page-wrapper"
 )
 
 # Define the callback to update the content
@@ -98,8 +99,11 @@ def update_state(state_choice):
         req = requests.get(url, timeout=5)
         soup = BeautifulSoup(req.text, 'lxml')
         
-        # Find the specific div containing the links
-        resource_links = soup.find('div', {'id': 'message-text-9bc4e092-e962-40aa-af8d-4b783e05154a'}).find_all('a')
+        div = soup.find('div', {'id': 'message-text-9bc4e092-e962-40aa-af8d-4b783e05154a'})
+        if div is not None:
+            resource_links = div.find_all('a')
+        else:
+            resource_links = []
         
         links_list = []
         for link in resource_links:
