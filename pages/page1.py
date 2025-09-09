@@ -18,11 +18,16 @@ fig = px.choropleth(
     locations = "State",
     locationmode= "USA-states",
     color = "Points",
-    title= f"Disability Friendliness by State",
     scope= "usa",
-    labels = {"State": "Disability Friendly Rank"},
+    labels = {"Points": "Disability Friendly Rank"},
     color_continuous_scale= "Cividis",
     range_color= (0, 225)
+)
+
+fig.update_layout(
+    title_text="Disability Friendliness by State",
+    geo=dict(showlakes=True, lakecolor="grey"),
+    margin={"r":0,"t":40, "l":0, "b":0}
 )
 
 
