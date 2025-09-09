@@ -159,9 +159,7 @@ a:hover {
     gap: 12px;
 }
 
-.block {
-    border: 2px dashed #cdb5e1;
-    border-radius: 8px;
+.map-header {
     background-color: #f5f7fa;
     color: #334155;
     min-height: 120px;
@@ -169,6 +167,13 @@ a:hover {
     align-items: center;
     justify-content: center;
     font-weight: 600;
+}
+
+.map-subheader {
+    background-color: #f5f7fa;
+    color: #1e293b;
+    font-size: 14px;
+    line-height: 1.4;
 }
 
 .block-top {
