@@ -1,3 +1,20 @@
+.header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 0;
+}
+.header-logo {
+    height: 56px;
+    width: auto;
+    margin-left: 18px;
+    margin-right: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(30,58,138,0.10);
+}
+/* AI used for much of the styling in this file */
+
 .image-banner {
     width: 100vw;
     margin-left: calc(-50vw + 50%);
@@ -63,12 +80,12 @@ body {
     z-index: 1;
 }
 
-h2 {
+.landing-header {
     color: #85afda;
     padding: 20px;
 }
 
-h3 {
+.landing-subtitle {
     color: #fff;
     text-align: right;
     font-family: 'Montserrat', 'Segoe UI', 'Arial', sans-serif;
@@ -81,6 +98,27 @@ h3 {
     padding-right: 32px;
     padding-left: 100px;
     padding-bottom: 20px;
+}
+
+.landing-footer {
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Montserrat', 'Segoe UI', 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 1.7rem;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+}
+
+.footer-subtitle {
+    background: #003882;
+    color: #ffffff;
+    border-radius: 10px;
+    padding: 24px 48px 24px 48px;
+    margin: 0 auto 24px auto;
+    max-width: 900px;
+    box-sizing: border-box;
 }
 
 p{
