@@ -17,11 +17,16 @@ fig = px.choropleth(
     locations = "State",
     locationmode= "USA-states",
     color = "Points",
-    title= f"Disability Friendliness by State",
     scope= "usa",
-    labels = {"State": "Disability Friendly Rank"},
+    labels = {"Points": "Disability Friendly Rank"},
     color_continuous_scale= "Cividis",
     range_color= (0, 225)
+)
+
+fig.update_Layout(
+    title_text="Disability Friendliness by State",
+    geo=dict(showlakes=True, Lakecolor="grey"),
+    margin={"r":0,"t":40, "l":0, "b":0}
 )
 
 
@@ -29,6 +34,7 @@ fig = px.choropleth(
 
 layout = html.Div([
     #top row
-    html.Div("Ranking of how disability friendly each state is", className="block"),
-    dcc.Graph(figure=fig)
+    html.Div("Ranking of how Disability Friendly each State is", className="block block-top"),
+    dcc.Graph(figure=fig),
+    html.Div("Footer", className= "block block-footer")
 ])
