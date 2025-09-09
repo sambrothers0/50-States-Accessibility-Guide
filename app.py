@@ -37,9 +37,10 @@ app.layout = html.Div([
         dbc.Container([
             dbc.Nav(
                 [
-                    dbc.NavLink("Map", href="/", active="exact"),
-                    dbc.NavLink("Info", href="/info", active="exact"),
-                    dbc.NavLink("Involvement", href="/involvement", active="exact")
+                    dbc.NavLink("Home", href="/", active="exact"),
+                    dbc.NavLink("Map", href="/page1", active="exact"),
+                    dbc.NavLink("Stats", href="/page2", active="exact"),
+                    dbc.NavLink("Resources", href="/page3",active = "exact")
                 ],
                 className="custom-navbar"
             ),
