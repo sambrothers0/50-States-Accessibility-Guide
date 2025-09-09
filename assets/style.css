@@ -1,12 +1,86 @@
+.image-banner {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    background: #003882;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 0 24px 0;
+}
+.landing-image {
+    display: block;
+    margin: 0 auto;
+    max-width: 340px;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(30,58,138,0.12);
+}
 
 body {
-    background-color: #DFEBE0 !important;
-    font-family: 'Arial, sans-serif';
+    background-color: #1c1c1d !important;
+    font-family: 'Montserrat', 'Segoe UI', 'Arial', sans-serif;
 
 }
 
+.app-title {
+    text-align: center;
+    font-family: 'Montserrat', 'Segoe UI', 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 2.8rem;
+    color: #85afda;
+    margin-top: 32px;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+    background-clip: text;
+}
+
+.landing-image {
+    display: block;
+    margin: 0 auto;
+    max-width: 340px;
+    border-radius: 12px;
+}
+
+.custom-navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: #85afda;
+    background: none;
+    margin-bottom: 32px;
+    letter-spacing: 0.5px;
+    border-radius: 8px;
+    padding-bottom: 8px;
+}
+
+.custom-navbar .nav-link {
+    transition: transform 0.2s cubic-bezier(0.4, 0.2, 0.2, 1), box-shadow 0.2s;
+}
+.custom-navbar .nav-link:hover {
+    transform: scale(1.08);
+    box-shadow: 0 2px 12px rgba(133, 175, 218, 0.15);
+    z-index: 1;
+}
+
 h2 {
-    color: #3d5a77;
+    color: #85afda;
+    padding: 20px;
+}
+
+h3 {
+    color: #fff;
+    text-align: right;
+    font-family: 'Montserrat', 'Segoe UI', 'Arial', sans-serif;
+    font-weight: 500;
+    font-size: 1.25rem;
+    margin-top: 10px;
+    margin-bottom: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.2px;
+    padding-right: 32px;
+    padding-left: 100px;
+    padding-bottom: 20px;
 }
 
 p{
@@ -21,16 +95,15 @@ a {
     border: 2px solid #ffffff;
     border-radius: 6px;
     padding: 10px 20px;
-    background-color: #000000;
+    background-color: #1c1c1d;
     color : #ffffff
 
 }
 
 a:hover {
-    text-decoration: underline;
-    background-color: #65ADBE;
-    border-color: #3d5a77;
-    color: #ffffff;
+    background-color: #85afda;
+    border-color: #ffffff;
+    color: #000000;
 }
 
 
