@@ -1,1 +1,2 @@
-A website for ______, created by group 8 of the Competing Through Business Analytics class at William & Mary's Master's of Business Analytics program in Fall 2025. The site is deployment live on Render at [this](url) link Developers: Ashley Gasswint, Pooja Muthuraj, Alex Farina, Sam Brothers.
+A website for providing in US travel information, created by Group 8 of the Competing Through Business Analytics class at William & Mary's Master's of Business Analytics program in Fall 2025. The site is deployment live on Render at [this](https://dash-api-final.onrender.com) link Developers: Ashley Gasswint, Pooja Muthuraj, Alex Farina, Sam Brothers. 
+Our audience is both domestic and international tourists, who are considering traveling within the US. 
