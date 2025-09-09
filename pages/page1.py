@@ -24,9 +24,9 @@ fig = px.choropleth(
     range_color= (0, 225)
 )
 
-fig.update_Layout(
+fig.update_layout(
     title_text="Disability Friendliness by State",
-    geo=dict(showlakes=True, Lakecolor="grey"),
+    geo=dict(showlakes=True, lakecolor="grey"),
     margin={"r":0,"t":40, "l":0, "b":0}
 )
 
