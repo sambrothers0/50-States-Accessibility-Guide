@@ -1,4 +1,3 @@
----
 ## 50 States Accessibility Guide
 
 **A website for mapping and displaying accessibility-related information, organized by US state.**
