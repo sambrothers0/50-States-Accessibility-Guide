@@ -5,7 +5,7 @@ import pandas as pd
 import plotly.express as px
 
 
-dash.register_page(__name__, path="/page1", name="Page 1")
+dash.register_page(__name__, path="/", name="Page 1")
 
 #Load the dataset
 Data_Path = Path(__file__).resolve().parent.parent / "data" / "DisabilityRankedStates.csv"
@@ -26,7 +26,7 @@ fig = px.choropleth(
 
 fig.update_layout(
     title_text="Disability Friendliness by State",
-    geo=dict(showlakes=True, lakecolor="grey"),
+    geo=dict(showlakes=True, lakecolor="lightblue"),
     margin={"r":0,"t":40, "l":0, "b":0}
 )
 
