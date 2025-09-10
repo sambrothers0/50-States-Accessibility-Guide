@@ -41,7 +41,9 @@ df["Disabled Individuals Ages 18-64 Employed (% of population)"] = df["Disabled 
 df["HEARING Disabled Individuals Ages 18-64 Employed (% of population)"] = df["HEARING Disabled Individuals Ages 18-64 Employed"] / df["2023-Population"] * 100
 df["VISION Disabled Individuals Ages 18-64 Employed (% of population)"] = df["VISION Disabled Individuals Ages 18-64 Employed"] / df["2023-Population"] * 100
 df["COGNITIVE Disabled Individuals Ages 18-64 Employed (% of population)"] = df["COGNITIVE Disabled Individuals Ages 18-64 Employed"] / df["2023-Population"] * 100
-
+df["Percentage of Disabled Individuals With a HighSchool Degree"] *= 100
+df["Percentage of Disabled Individuals With a 4-Year College Degree"] *= 100
+df["Healthcare Insurance Coverage Rate for Disabled Individuals"] *= 100
 
 # Dropdown options (only normalized + relevant)
 numeric_columns = [
