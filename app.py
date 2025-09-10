@@ -9,6 +9,8 @@ app = Dash(__name__, use_pages=True, suppress_callback_exceptions=True, title="M
 server = app.server #for deployment
 
 app.layout = html.Div([
+    # Main page container with border
+    html.Div([
     html.Div([
         html.H1("50 States Accessibility Guide", className="app-title"),
         html.Img(src="/assets/img/logo.png", className="header-logo", alt="Project logo"),
@@ -27,8 +29,8 @@ app.layout = html.Div([
     html.H3("Our website includes several features which make it easier for users to view "
             "and understand accessibility data. There is an interactive map that displays "
             " accessibility ratings for each state, allowing users to quickly identify"
-            " areas with high or low accessibility. The info page features more comprehensive"
-            " disability data, which can't be succinctly viewed from just the map. We have also"
+            " areas with high or low accessibility. The details page features more comprehensive"
+            " disability data based on various categories of disability. We have also"
             " included a collection of disability advocacy groups for getting directly involved"
             " with the disabled community. This project provides a helpful place for people"
             " who are concerned with accessibility to find travel information across the states,"
@@ -38,7 +40,7 @@ app.layout = html.Div([
             dbc.Nav(
                 [
                     dbc.NavLink("Overview", href="/", active="exact"),
-                    dbc.NavLink("Details", href="/page2", active="exact"),
+                    dbc.NavLink("Details", href="/details", active="exact"),
                     dbc.NavLink("Resources", href="/resources", active="exact")
                 ],
                 className="custom-navbar"
@@ -48,7 +50,7 @@ app.layout = html.Div([
         dark=False,
         className="mb-4"
     ),
-    page_container,
+    html.Div(page_container, className="nav-page-border"),
     html.H2("Conscious Design", className="landing-footer"),
     html.H3("In creating this website, we have made a conscious effort to ensure"
             " that it is accessible to all users, including those with disabilities."
@@ -58,6 +60,7 @@ app.layout = html.Div([
             " promoting accessibility through not only the information it contains,"
             " but also the way that information is presented.", className="footer-subtitle"),
     html.A("Project Information and Code", href="https://github.com/sambrothers0/dash-api-final", target="_blank", className="footer-link")
+    ]),
 ])
 
 if __name__ == "__main__":

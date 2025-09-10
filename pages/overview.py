@@ -28,11 +28,11 @@ fig = px.choropleth(
 fig.update_layout(
     title_text="Disability Friendliness by State",
     geo=dict(showlakes=True, lakecolor="lightblue"),
+    paper_bgcolor="#0a2342",  
+    plot_bgcolor="#0a2342",  
+    font_color="white",
     margin={"r":0,"t":40, "l":0, "b":0}
 )
-
-
-
 
 layout = html.Div([
     html.Div([
@@ -45,7 +45,7 @@ layout = html.Div([
         ),
     ], className="resources-page-wrapper"),
     html.Div([
-        dcc.Graph(figure=fig, config={"displayModeBar": False}),
+        dcc.Graph(figure=fig, config={"displayModeBar": False}, style={"padding": "24px"}),
     ], className="page1-grid"),
     html.Div([
         html.H2("How to Use This Map", className="landing-header"),

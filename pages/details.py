@@ -4,7 +4,7 @@ import plotly.express as px
 from pathlib import Path
 import us  # pip install us
 
-register_page(__name__, path="/page2", name="Disability Info by State")
+register_page(__name__, path="/details", name="Disability Info by State")
 
 
 # Load CSV
@@ -62,7 +62,7 @@ numeric_columns = [
 
 # Layout
 layout = html.Div(
-    style={"backgroundColor": "#293831", "color": "white", "padding": "10px"},
+    style={"backgroundColor": "rgba(0,0,0,0)", "color": "white", "padding": "10px"},
     children=[
         html.H1("US Disability Data by State", style={"color": "#cdd6d3", "textAlign": "center"}),
 
@@ -138,8 +138,9 @@ def update_map(selected_column):
     )
 
     fig.update_layout(
-        geo=dict(bgcolor="#B9975B"),
-        paper_bgcolor="#32453C",
+        geo=dict(bgcolor="#0a2342"),
+        paper_bgcolor="#0a2342", 
+        plot_bgcolor="#0a2342",   
         font_color="white",
         margin=dict(l=10, r=10, t=50, b=10)
     )
