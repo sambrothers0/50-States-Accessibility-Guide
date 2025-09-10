@@ -1,3 +1,5 @@
+AI Disclaimer: AI was used to format most of this text into markdown format, although the text itself was mostly human made
+
 ## 50 States Accessibility Guide
 
 **A website for mapping and displaying accessibility-related information, organized by US state.**
