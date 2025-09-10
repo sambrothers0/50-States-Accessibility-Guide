@@ -1,26 +1,161 @@
-from dash import html, register_page, dcc, Input, Output, callback
-import requests
+from dash import html, dcc, Input, Output, callback, register_page
+import pandas as pd
+import plotly.express as px
+from pathlib import Path
+import us  # pip install us
 
-register_page(__name__, path="/page2", name="Page 2")
+register_page(__name__, path="/page2", name="Disability Info by State")
 
-layout = html.Div([
-    html.H2("Page 2", className="page-title"),
-    html.P("Click to fetch a random cat fact from a public API!",className="page-subtitle"),
-    html.Button("Get Cat Fact", id="button-cat", n_clicks=0),
-    dcc.Loading(html.Div(id="cat-fact"))
-], className="page2-wrapper")
+
+# Load CSV
+Data_Path = Path(__file__).resolve().parent.parent / "data" / "disabilities.csv"
+df = pd.read_csv(Data_Path)
+
+
+# Convert state names to 2-letter codes
+df['state_code'] = df['State'].apply(lambda x: us.states.lookup(x).abbr if us.states.lookup(x) else None)
+
+
+# Rename columns
+df.rename(columns={
+    "# with Disability Living in the Community": "Disabled Individuals",
+    "# with Hearing Disability": "HEARING Disabled Individuals",
+    "#with Vision Disability": "VISION Disabled Individuals",
+    "# with Cognitive Disability": "COGNITIVE Disabled Individuals",
+    "# with disability Ages 18-64 Employed": "Disabled Individuals Ages 18-64 Employed",
+    "# ages 18-64 Employed with Hearing Dis": "HEARING Disabled Individuals Ages 18-64 Employed",
+    "# Ages 18-64 Employed  with Vision Dis": "VISION Disabled Individuals Ages 18-64 Employed",
+    "# Ages 18-64 Employed with Cognitive Dis": "COGNITIVE Disabled Individuals Ages 18-64 Employed",
+    "$Annual Median Earnings Full-Time with Disability": "Median Wage for Disabled Workers",
+    "% Health Insurance Coverage Rate for Disabled Individuals": "Healthcare Insurance Coverage Rate for Disabled Individuals",
+    "% Disabled Individuals With HighSchool Degree": "Percentage of Disabled Individuals With a HighSchool Degree",
+    "% Disabled Individuals With 4-Year College Degree": "Percentage of Disabled Individuals With a 4-Year College Degree"
+}, inplace=True)
+
+# Normalize selected columns by population
+df["Disabled Individuals (% of population)"] = df["Disabled Individuals"] / df["2023-Population"] * 100
+df["HEARING Disabled Individuals (% of population)"] = df["HEARING Disabled Individuals"] / df["2023-Population"] * 100
+df["VISION Disabled Individuals (% of population)"] = df["VISION Disabled Individuals"] / df["2023-Population"] * 100
+df["COGNITIVE Disabled Individuals (% of population)"] = df["COGNITIVE Disabled Individuals"] / df["2023-Population"] * 100
+df["Disabled Individuals Ages 18-64 Employed (% of population)"] = df["Disabled Individuals Ages 18-64 Employed"] / df["2023-Population"] * 100
+df["HEARING Disabled Individuals Ages 18-64 Employed (% of population)"] = df["HEARING Disabled Individuals Ages 18-64 Employed"] / df["2023-Population"] * 100
+df["VISION Disabled Individuals Ages 18-64 Employed (% of population)"] = df["VISION Disabled Individuals Ages 18-64 Employed"] / df["2023-Population"] * 100
+df["COGNITIVE Disabled Individuals Ages 18-64 Employed (% of population)"] = df["COGNITIVE Disabled Individuals Ages 18-64 Employed"] / df["2023-Population"] * 100
+
+
+# Dropdown options (only normalized + relevant)
+numeric_columns = [
+    "Disabled Individuals (% of population)",
+    "HEARING Disabled Individuals (% of population)",
+    "VISION Disabled Individuals (% of population)",
+    "COGNITIVE Disabled Individuals (% of population)",
+    "Disabled Individuals Ages 18-64 Employed (% of population)",
+    "HEARING Disabled Individuals Ages 18-64 Employed (% of population)",
+    "VISION Disabled Individuals Ages 18-64 Employed (% of population)",
+    "COGNITIVE Disabled Individuals Ages 18-64 Employed (% of population)",
+    "Median Wage for Disabled Workers",
+    "Healthcare Insurance Coverage Rate for Disabled Individuals",
+    "Percentage of Disabled Individuals With a HighSchool Degree",
+    "Percentage of Disabled Individuals With a 4-Year College Degree"
+]
+
+
+# Layout
+layout = html.Div(
+    style={"backgroundColor": "#293831", "color": "white", "padding": "10px"},
+    children=[
+        html.H1("US Disability Data by State", style={"color": "#cdd6d3", "textAlign": "center"}),
+
+        html.Div(
+            [
+                html.Label("Select Column to Display:", style={"marginBottom": "8px"}),
+                dcc.Dropdown(
+                    id="column-dropdown",
+                    options=[{"label": col, "value": col} for col in numeric_columns],
+                    value=numeric_columns[0],
+                    clearable=False,
+                    style={"color": "black"}
+                ),
+            ],
+            style={"width": "40%", "margin": "0 auto"}  # Center the dropdown
+        ),
+
+        html.Br(),
+        dcc.Graph(id="choropleth-map")
+    ]
+)
 
 
 @callback(
-    Output("cat-fact", "children"),
-    Input("button-cat", "n_clicks")
+    Output("choropleth-map", "figure"),
+    Input("column-dropdown", "value")
 )
+def update_map(selected_column):
+    # Get the color values explicitly
+    color_values = df[selected_column]
 
-def fetch_cat_fact(n):
-    try:
-        r = requests.get("https://catfact.ninja/fact", timeout=5)
-        r.raise_for_status()
-        fact = r.json().get("fact", "No fact found.")
-        return html.Div(fact)
-    except requests.RequestException as e:
-        return html.Div(f"Error fetching cat fact from API: {e}")
+    fig = px.choropleth(
+        df,
+        locations="state_code",
+        locationmode="USA-states",
+        color=color_values,
+        color_continuous_scale="Cividis",
+        scope="usa",
+        labels={selected_column: selected_column}
+    )
+
+    # Decide formatting for hover + colorbar
+    if "(% of population)" in selected_column or "Percentage" in selected_column or "Rate" in selected_column:
+        value_format = "%{z:.2f}%"     # 2 decimals
+        tick_format = ".2f"            # 2 decimals
+        suffix = "%"
+    elif "Wage" in selected_column or "Earnings" in selected_column or "Median" in selected_column:
+        value_format = "$%{z:,.0f}"
+        tick_format = "$,.0f"
+        suffix = ""
+    else:
+        value_format = "%{z:,}"
+        tick_format = ",.0f"
+        suffix = ""
+
+    # Set hovertemplate
+    fig.update_traces(
+        hovertemplate=(
+            "<b>%{customdata[0]}</b><br>"
+            f"{selected_column}: {value_format}"
+            "<extra></extra>"
+        ),
+        customdata=df[["State"]]
+    )
+
+    # Set colorbar formatting
+    fig.update_coloraxes(
+        colorbar=dict(
+            title=selected_column,
+            tickformat=tick_format,
+            ticksuffix=suffix
+        )
+    )
+
+    fig.update_layout(
+        geo=dict(bgcolor="#B9975B"),
+        paper_bgcolor="#32453C",
+        font_color="white",
+        margin=dict(l=10, r=10, t=50, b=10)
+    )
+
+    return fig
+
+
+
+#Looking at data on different aspects of disability across US states!
+#This map shows users various statistics related to disabilities in each state, such as:
+#       the percentage of individuals with disabilities, employment rates among disabled individuals, 
+#       median wages, healthcare coverage rates, and levels of education.
+#
+
+
+#How to use:
+# 1. Select a column from the dropdown menu to visualize different aspects of disability data across US states.
+# 2. Hover over a state on the map to see detailed information about that state, including the selected metric.
+# 3. The color intensity on the map represents the value of the selected metric, with a color bar indicating the scale.
