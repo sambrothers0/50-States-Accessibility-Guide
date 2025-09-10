@@ -1,3 +1,6 @@
+# AI Assistance
+## Google Gemini asked how to code fetch_disability_fact function using random package,
+## after prompting for how to create a function iterating through facts_list to choose a random index value to print
 from dash import html, register_page, dcc, Input, Output, callback
 import requests
 import random
