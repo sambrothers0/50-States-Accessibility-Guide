@@ -93,12 +93,12 @@ layout = html.Div(
         dash_table.DataTable(
             id="top-bottom-table",
             style_header={
-                'backgroundColor': '#16213e',  # Same blue as page background
+                'backgroundColor': '#16213e',
                 'color': 'white',
                 'fontWeight': 'bold'
             },
             style_cell={
-                'backgroundColor': '#16213e',  # Same blue as page background
+                'backgroundColor': '#16213e',
                 'color': 'white',
                 'textAlign': 'left',
                 'padding': '5px'
