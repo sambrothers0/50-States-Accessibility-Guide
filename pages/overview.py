@@ -1,3 +1,4 @@
+#AI usage comment: Copilot was used to help put this page together. It was used to help with formatting, debugging, and was used to quickly update the DisabilityRankedStates.csv from full state names to abreviations.
 import dash
 from dash import Dash, html, dcc, Input, Output, callback, page_container
 from pathlib import Path
