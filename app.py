@@ -1,4 +1,4 @@
-#app.py
+# AI use statement: AI was used minimally within this page. Its main purpose was to write and explain certain code that the developers were less familiar with, such as alternative text on images. AI was also responsible for naming many of the classes within this file.
 import dash
 from dash import Dash, html, dcc, Input, Output, callback, page_container
 import dash_bootstrap_components as dbc
