@@ -1,3 +1,11 @@
+# AI Assistance
+## Used AI to help make dcc dropdown
+## Implemented AI-provided suggestion for loading icon for UX purposes
+## After writing initial code for update_state() function, used AI for significant debugging
+## Based original web scrape function off of in-class example; used AI to help navigate more complex logic:
+#### i.e., AI output: "if div is not None:", ", target="_blank"" to open link in new tab
+## Used AI for error and null handling:
+#### "if not links_list", "except requests.exceptions.RequestException"
 import dash
 from dash import html, dcc, Input, Output, callback, register_page
 import pandas as pd
