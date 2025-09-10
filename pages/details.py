@@ -1,4 +1,4 @@
-from dash import html, dcc, Input, Output, callback, register_page
+from dash import html, dcc, Input, Output, callback, register_page, dash_table
 import pandas as pd
 import plotly.express as px
 from pathlib import Path
@@ -41,7 +41,9 @@ df["Disabled Individuals Ages 18-64 Employed (% of population)"] = df["Disabled 
 df["HEARING Disabled Individuals Ages 18-64 Employed (% of population)"] = df["HEARING Disabled Individuals Ages 18-64 Employed"] / df["2023-Population"] * 100
 df["VISION Disabled Individuals Ages 18-64 Employed (% of population)"] = df["VISION Disabled Individuals Ages 18-64 Employed"] / df["2023-Population"] * 100
 df["COGNITIVE Disabled Individuals Ages 18-64 Employed (% of population)"] = df["COGNITIVE Disabled Individuals Ages 18-64 Employed"] / df["2023-Population"] * 100
-
+df["Percentage of Disabled Individuals With a HighSchool Degree"] *= 100
+df["Percentage of Disabled Individuals With a 4-Year College Degree"] *= 100
+df["Healthcare Insurance Coverage Rate for Disabled Individuals"] *= 100
 
 # Dropdown options (only normalized + relevant)
 numeric_columns = [
@@ -81,10 +83,30 @@ layout = html.Div(
         ),
 
         html.Br(),
-        dcc.Graph(id="choropleth-map")
+
+        # ADD THIS: Graph for choropleth
+        dcc.Graph(id="choropleth-map"),
+
+        html.H2("Top & Bottom 5 States", style={"color": "white", "textAlign": "center", "marginTop": "20px"}),
+
+        # Table
+        dash_table.DataTable(
+            id="top-bottom-table",
+            style_header={
+                'backgroundColor': '#32453C',
+                'color': 'white',
+                'fontWeight': 'bold'
+            },
+            style_cell={
+                'backgroundColor': '#293831',
+                'color': 'white',
+                'textAlign': 'left',
+                'padding': '5px'
+            },
+            style_table={'margin': '0 auto', 'width': '60%'}  # Center the table
+        )
     ]
 )
-
 
 @callback(
     Output("choropleth-map", "figure"),
@@ -147,13 +169,34 @@ def update_map(selected_column):
 
     return fig
 
+# Separate callback for Table
+# -----------------------------
+@callback(
+    Output("top-bottom-table", "data"),
+    Output("top-bottom-table", "columns"),
+    Input("column-dropdown", "value")
+)
+def update_table(selected_column):
+    # Sort descending for top 5
+    sorted_df = df.sort_values(by=selected_column, ascending=False)
+    top5 = sorted_df.iloc[:5, :][["State", selected_column]]
+    bottom5 = sorted_df.iloc[-5:, :][["State", selected_column]]
 
+    # Create a separator row
+    separator = pd.DataFrame([{"State": "Top 5 ↑ ----- Bottom 5 ↓", selected_column: None}])
+
+    # Concatenate top5 + separator + bottom5
+    table_df = pd.concat([top5, separator, bottom5]).reset_index(drop=True)
+
+    table_data = table_df.to_dict('records')
+    table_columns = [{"name": col, "id": col} for col in table_df.columns]
+
+    return table_data, table_columns
 
 #Looking at data on different aspects of disability across US states!
 #This map shows users various statistics related to disabilities in each state, such as:
 #       the percentage of individuals with disabilities, employment rates among disabled individuals, 
 #       median wages, healthcare coverage rates, and levels of education.
-#
 
 
 #How to use:
