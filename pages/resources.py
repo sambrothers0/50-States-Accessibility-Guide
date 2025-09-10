@@ -91,7 +91,7 @@ def update_state(state_choice):
     if not state_choice:
         return (
             "See Disability Support Resource Centers in Virginia",
-            "Right now, this page is displaying resources in Virginia.",
+            "This page is displaying resources in Virginia.",
             html.P("Links for your state would appear here.")
         )
 
@@ -132,6 +132,6 @@ def update_state(state_choice):
         
     # Update the heading and paragraph
     heading_text = f"See Disability Support Resource Centers in {state_choice}"
-    paragraph_text = f"Right now, this page is displaying resources in {state_choice}."
+    paragraph_text = f"Displaying resources in {state_choice}."
     
     return heading_text, paragraph_text, links_list

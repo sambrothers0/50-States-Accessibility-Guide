@@ -27,7 +27,8 @@ layout = html.Div([
     dcc.Loading(html.Div(id="disability-fact", style={"color": "white", "fontSize": "1.2em", "margin": "16px 0"})),
     html.P("See more facts: ", style={"color": "white", "marginTop": "24px"}),
     html.A("Fun facts source", href="https://facts.net/society-and-social-sciences/society/32-facts-about-disability/", 
-           style={"color": "white", "textDecoration": "underline"}),
+           style={"color": "white", "textDecoration": "underline"},
+           target="_blank"),
 ], style={
     "backgroundColor": "#16213e",
     "padding": "36px 32px 32px 32px",
