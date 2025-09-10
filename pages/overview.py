@@ -21,7 +21,8 @@ fig = px.choropleth(
     scope= "usa",
     labels = {"Points": "Disability Friendly Rank"},
     color_continuous_scale= "Cividis",
-    range_color= (0, 225)
+    range_color= (0, 225),
+    hover_data=["Rank"]
 )
 
 fig.update_layout(
