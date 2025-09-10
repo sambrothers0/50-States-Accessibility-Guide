@@ -64,7 +64,14 @@ layout = html.Div(
         html.P(
             "See services in all states: "
         ),
-        html.A("https://www.disabilityresources.org/state-services")
+        html.Div(
+            html.A(
+                "https://www.disabilityresources.org/state-services",
+                href="https://www.disabilityresources.org/state-services",
+                target="_blank"
+            ),
+            style={"textAlign": "center", "marginTop": "8px"}
+        )
     ],
     className="resources-page-wrapper"
 )
