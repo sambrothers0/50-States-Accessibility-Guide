@@ -31,7 +31,7 @@ layout = html.Div(
         ),
         # Paragraph with a dynamic ID
         html.P(
-            "Right now, this page is displaying resources in Virginia.",
+            "Displaying resources in Virginia.",
             id="paragraph"
         ),
         html.P(
