@@ -4,7 +4,7 @@ from dash import Dash, html, dcc, Input, Output, callback, page_container
 import dash_bootstrap_components as dbc
 
 #initialize the app
-app = Dash(__name__, use_pages=True, suppress_callback_exceptions=True, title="Multi Page App")
+app = Dash(__name__, use_pages=True, suppress_callback_exceptions=True, title="50 States Accessibility Guide")
 
 server = app.server #for deployment
 
