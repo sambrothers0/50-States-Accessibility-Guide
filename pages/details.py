@@ -1,8 +1,9 @@
+#AI Usage: CoPilot and ChatGPT used in sections: Convert state names to 2-letter codes, Decide formatting for hover + colorbar and Set hovertemplate
 from dash import html, dcc, Input, Output, callback, register_page, dash_table
 import pandas as pd
 import plotly.express as px
 from pathlib import Path
-import us  # pip install us
+import us 
 
 register_page(__name__, path="/details", name="Disability Info by State")
 
@@ -32,7 +33,7 @@ df.rename(columns={
     "% Disabled Individuals With 4-Year College Degree": "Percentage of Disabled Individuals With a 4-Year College Degree"
 }, inplace=True)
 
-# Normalize selected columns by population
+# Normalize selected columns by population and fix percentage issues
 df["Disabled Individuals (% of population)"] = df["Disabled Individuals"] / df["2023-Population"] * 100
 df["HEARING Disabled Individuals (% of population)"] = df["HEARING Disabled Individuals"] / df["2023-Population"] * 100
 df["VISION Disabled Individuals (% of population)"] = df["VISION Disabled Individuals"] / df["2023-Population"] * 100
@@ -45,7 +46,7 @@ df["Percentage of Disabled Individuals With a HighSchool Degree"] *= 100
 df["Percentage of Disabled Individuals With a 4-Year College Degree"] *= 100
 df["Healthcare Insurance Coverage Rate for Disabled Individuals"] *= 100
 
-# Dropdown options (only normalized + relevant)
+# Dropdown options
 numeric_columns = [
     "Disabled Individuals (% of population)",
     "HEARING Disabled Individuals (% of population)",
@@ -84,7 +85,7 @@ layout = html.Div(
 
         html.Br(),
 
-        # ADD THIS: Graph for choropleth
+        # Graph for choropleth
         dcc.Graph(id="choropleth-map"),
 
         html.H2("Top & Bottom 5 States", style={"color": "white", "textAlign": "center", "marginTop": "20px"}),
@@ -113,7 +114,7 @@ layout = html.Div(
     Input("column-dropdown", "value")
 )
 def update_map(selected_column):
-    # Get the color values explicitly
+    # Get the color values
     color_values = df[selected_column]
 
     fig = px.choropleth(
@@ -126,7 +127,7 @@ def update_map(selected_column):
         labels={selected_column: selected_column}
     )
 
-    # Decide formatting for hover + colorbar
+    # Decide formatting for hover and colorbar
     if "(% of population)" in selected_column or "Percentage" in selected_column or "Rate" in selected_column:
         value_format = "%{z:.2f}%"     # 2 decimals
         tick_format = ".2f"            # 2 decimals
@@ -169,8 +170,8 @@ def update_map(selected_column):
 
     return fig
 
-# Separate callback for Table
-# -----------------------------
+# Table Callback
+
 @callback(
     Output("top-bottom-table", "data"),
     Output("top-bottom-table", "columns"),
@@ -182,10 +183,10 @@ def update_table(selected_column):
     top5 = sorted_df.iloc[:5, :][["State", selected_column]]
     bottom5 = sorted_df.iloc[-5:, :][["State", selected_column]]
 
-    # Create a separator row
+    # Put in a separator row
     separator = pd.DataFrame([{"State": "Top 5 ↑ ----- Bottom 5 ↓", selected_column: None}])
 
-    # Concatenate top5 + separator + bottom5
+    # Put top5 + separator + bottom5 into table
     table_df = pd.concat([top5, separator, bottom5]).reset_index(drop=True)
 
     table_data = table_df.to_dict('records')
