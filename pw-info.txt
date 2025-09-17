@@ -1,4 +1,4 @@
 50 States Accessibility Guide
-A dashboard for organizing state accessibilty rankings and information using the Python Dash library. It was created by 4 developers during the Competing Through Business Analytics graduate class at William & Mary, and practices web scraping and CSV managament for data visualization. Plotly is used for interactive graphs, and the entire website is accessible to anyone with a disability. This project was created entirely within one 48-hour sprint, challenging our programming, teamwork, and communication skills.
+A dashboard for organizing state accessibilty rankings and information using the Python Dash library, hosted on Render. It was created by 4 developers during the Competing Through Business Analytics graduate class at William & Mary, and practices web scraping and CSV managament for data visualization. Plotly is used for interactive graphs, and the entire website is accessible to anyone with a disability. This project was created entirely within one 48-hour sprint, challenging our programming, teamwork, and communication skills.
 Sep 2025
 https://dash-api-final.onrender.com/
