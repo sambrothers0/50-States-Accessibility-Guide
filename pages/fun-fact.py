@@ -5,7 +5,7 @@ from dash import html, register_page, dcc, Input, Output, callback
 import requests
 import random
 
-register_page(__name__, path="/fun-fact", name="Interesting Fact")
+register_page(__name__, path="/interesting-fact", name="Interesting Fact")
 
 layout = html.Div([
     html.H2("Did You Know?", style={"color": "white", "textAlign": "center", "marginTop": "20px"}),
