@@ -5,7 +5,7 @@ from dash import html, register_page, dcc, Input, Output, callback
 import requests
 import random
 
-register_page(__name__, path="/fun-fact", name="Fun Fact")
+register_page(__name__, path="/interesting-fact", name="Interesting Fact")
 
 layout = html.Div([
     html.H2("Did You Know?", style={"color": "white", "textAlign": "center", "marginTop": "20px"}),
@@ -29,7 +29,7 @@ layout = html.Div([
     ),
     dcc.Loading(html.Div(id="disability-fact", style={"color": "white", "fontSize": "1.2em", "margin": "16px 0"})),
     html.P("See more facts: ", style={"color": "white", "marginTop": "24px"}),
-    html.A("Fun facts source", href="https://facts.net/society-and-social-sciences/society/32-facts-about-disability/", 
+    html.A("Facts source", href="https://facts.net/society-and-social-sciences/society/32-facts-about-disability/", 
            style={"color": "white", "textDecoration": "underline"},
            target="_blank"),
 ], style={
